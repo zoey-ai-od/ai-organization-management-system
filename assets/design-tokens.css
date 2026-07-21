@@ -1,0 +1,169 @@
+/*
+  ═══════════════════════════════════════
+  Unified Design Tokens — AI 组织管理系统
+  LightTech 浅色科技美学
+  ═══════════════════════════════════════
+
+  架构说明:
+  - 所有视觉 token 集中在此文件
+  - 品牌页 & Demo 页共用同一套变量
+  - 支持 [data-theme="dark"] 未来扩展
+  - 无 !important — 层叠优先级由选择器特异性控制
+*/
+
+:root {
+  /* ── 色彩系统 ── */
+  /* 品牌色 */
+  --brand-blue:       #5478ff;
+  --brand-blue-deep:  #3b63f3;
+  --brand-cyan:       #16bde8;
+  --brand-purple:     #8a63e8;
+  --brand-mint:       #18b991;
+
+  /* 语义色 */
+  --color-success:    #118064;
+  --color-warning:    #bf7524;
+  --color-danger:     #c94762;
+  --color-info:       #3e65ba;
+
+  /* 中性色 */
+  --text-primary:     #12213d;
+  --text-secondary:   #3d5070;  /* ↑ 原 #596b89 → 提高对比度达 WCAG AA */
+  --text-tertiary:    #5e708c;  /* ↑ 原 #71819a → 提高对比度 */
+  --text-muted:       #7a8ca5;
+  --text-placeholder: #9aa6ba;
+
+  /* 表面色 */
+  --bg-root:          #f5f8ff;
+  --bg-elevated:      #eef4ff;
+  --bg-surface:       rgba(255, 255, 255, 0.82);
+  --bg-surface-solid: #ffffff;
+  --bg-surface-soft:  rgba(54, 92, 170, 0.055);
+
+  /* 边框色 */
+  --border-light:     rgba(71, 103, 171, 0.14);
+  --border-medium:    rgba(61, 111, 214, 0.27);
+  --border-focus:     rgba(32, 171, 211, 0.45);
+
+  /* 阴影 */
+  --shadow-lg:        0 30px 90px rgba(55, 83, 143, 0.14);
+  --shadow-md:        0 20px 60px rgba(60, 87, 145, 0.115);
+  --shadow-sm:        0 12px 34px rgba(58, 83, 137, 0.055);
+  --shadow-button:    0 14px 32px rgba(56, 92, 210, 0.23);
+  --shadow-card-hover: 0 26px 70px rgba(60, 87, 145, 0.15);
+
+  /* ── 排版系统 ── */
+  --font-primary:     'Inter', 'SF Pro Display', -apple-system, 'PingFang SC', system-ui, sans-serif;
+  --font-mono:        'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+
+  --text-xs:          0.75rem;   /* 12px */
+  --text-sm:          0.8125rem; /* 13px */
+  --text-base:        0.875rem;  /* 14px */
+  --text-md:          0.9375rem; /* 15px */
+  --text-lg:          1.125rem;  /* 18px */
+  --text-xl:          1.375rem;  /* 22px */
+  --text-2xl:         1.75rem;   /* 28px */
+  --text-3xl:         2.25rem;   /* 36px */
+  --text-4xl:         3rem;      /* 48px */
+
+  --leading-tight:    1.2;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.65;
+
+  /* ── 间距系统 (4px base) ── */
+  --space-1:          4px;
+  --space-2:          8px;
+  --space-3:          12px;
+  --space-4:          16px;
+  --space-5:          20px;
+  --space-6:          24px;
+  --space-8:          32px;
+  --space-10:         40px;
+  --space-12:         48px;
+  --space-16:         64px;
+
+  /* ── 圆角 ── */
+  --radius-sm:        8px;
+  --radius-md:        12px;
+  --radius-lg:        16px;
+  --radius-xl:        20px;
+  --radius-full:      9999px;
+
+  /* ── 动效 ── */
+  --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:      cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:    150ms;
+  --duration-normal:  250ms;
+  --duration-slow:    400ms;
+
+  /* ── 层级 ── */
+  --z-base:           1;
+  --z-dropdown:       100;
+  --z-sticky:         200;
+  --z-modal:          300;
+  --z-toast:          400;
+
+  /* ── 布局 ── */
+  --sidebar-width:    248px;
+  --topbar-height:    52px;
+  --content-max:      1440px;
+
+  /* 预设颜色方案 */
+  color-scheme: light;
+}
+
+/* ── 页面背景 (品牌页) ── */
+html.brand-page,
+body.brand-page {
+  background: var(--bg-root);
+}
+
+body.brand-page {
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 8% -4%, rgba(91, 126, 255, 0.19), transparent 29%),
+    radial-gradient(circle at 96% 2%, rgba(21, 194, 232, 0.14), transparent 27%),
+    radial-gradient(circle at 72% 106%, rgba(153, 105, 232, 0.12), transparent 34%),
+    linear-gradient(180deg, #fbfdff 0%, #f3f7ff 52%, #f8fbff 100%);
+}
+
+/* ── 页面背景 (Demo/App 页) ── */
+html.app-page {
+  background: #f3f7fd;
+}
+
+body.app-page {
+  color: var(--text-primary);
+}
+
+/* ── 网格背景纹理 ── */
+.grid-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(61, 99, 177, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 99, 177, 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.52) 66%, transparent 96%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-bg::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.14;
+  background-image: radial-gradient(rgba(45, 81, 150, 0.18) 0.5px, transparent 0.65px);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 选中色 ── */
+::selection {
+  background: rgba(56, 105, 244, 0.18);
+  color: #0c1e42;
+}

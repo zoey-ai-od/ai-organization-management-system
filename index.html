@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AI-Native Organization OS：面向早期团队的需求协同、知识沉淀与组织洞察系统 Demo。" />
+  <meta name="theme-color" content="#F5F8FF" />
+  <title>NEXUS Organization OS · AI 组织协作系统</title>
+  <link rel="stylesheet" href="assets/design-tokens.css" />
+  <link rel="stylesheet" href="assets/shared-components.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .hero { min-height: 100vh; display: grid; align-items: center; padding: 132px 0 80px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 64px; align-items: center; }
+    .hero h1 { font-size: clamp(52px, 7vw, 88px); line-height: .98; letter-spacing: -.065em; margin: 20px 0 24px; max-width: 790px; }
+    .hero-copy { max-width: 680px; color: #aebbd6; font-size: 18px; line-height: 1.85; margin-bottom: 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 18px; color: #7d8cab; font-size: 12px; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta svg { width: 15px; height: 15px; color: #91a8ff; }
+    .hero-note { margin-top: 22px; padding: 10px 13px; border-left: 2px solid rgba(67,217,255,.7); color: #8795b4; font-size: 12px; line-height: 1.7; background: linear-gradient(90deg, rgba(67,217,255,.055), transparent); border-radius: 0 10px 10px 0; max-width: 620px; }
+
+    .orbital { position: relative; min-height: 590px; display: grid; place-items: center; }
+    .orbital::before, .orbital::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(116,144,225,.17); animation: spin 26s linear infinite; }
+    .orbital::before { width: 520px; height: 520px; border-style: dashed; }
+    .orbital::after { width: 390px; height: 390px; animation-direction: reverse; animation-duration: 19s; }
+    .core-glow { position: absolute; width: 330px; height: 330px; border-radius: 50%; background: radial-gradient(circle, rgba(61,103,255,.32), rgba(67,217,255,.08) 45%, transparent 72%); filter: blur(10px); animation: breathe 4s ease-in-out infinite; }
+    .system-core { width: 295px; height: 295px; border-radius: 50%; background: linear-gradient(160deg, rgba(21,31,66,.94), rgba(10,15,34,.92)); border: 1px solid rgba(141,163,226,.24); box-shadow: inset 0 0 55px rgba(61,103,255,.12), 0 38px 100px rgba(0,0,0,.45); display: grid; place-items: center; position: relative; z-index: 3; overflow: hidden; }
+    .system-core::before { content: ""; position: absolute; inset: 22px; border-radius: 50%; border: 1px solid rgba(67,217,255,.18); }
+    .system-core::after { content: ""; position: absolute; width: 120%; height: 26px; background: linear-gradient(90deg, transparent, rgba(67,217,255,.16), transparent); transform: rotate(-14deg); animation: scan 4.8s ease-in-out infinite; }
+    .core-content { text-align: center; z-index: 2; }
+    .core-icon { width: 60px; height: 60px; margin: 0 auto 14px; display: grid; place-items: center; border-radius: 18px; background: linear-gradient(135deg, rgba(61,103,255,.3), rgba(67,217,255,.18)); border: 1px solid rgba(110,181,255,.32); color: #b6e9ff; box-shadow: 0 0 34px rgba(67,217,255,.2); }
+    .core-icon svg { width: 31px; height: 31px; }
+    .core-content strong { display: block; font-size: 24px; letter-spacing: -.03em; }
+    .core-content span { display: block; color: #8595b8; font-size: 12px; margin-top: 7px; letter-spacing: .08em; text-transform: uppercase; }
+    .orbit-card { position: absolute; z-index: 5; width: 190px; padding: 14px; background: rgba(13,20,44,.88); border: 1px solid rgba(136,157,212,.24); border-radius: 16px; box-shadow: 0 18px 42px rgba(0,0,0,.34); backdrop-filter: blur(14px); animation: float 5s ease-in-out infinite; }
+    .orbit-card:nth-of-type(2) { top: 70px; left: 4px; }
+    .orbit-card:nth-of-type(3) { top: 130px; right: -14px; animation-delay: -1.8s; }
+    .orbit-card:nth-of-type(4) { bottom: 54px; left: 22px; animation-delay: -3.2s; }
+    .orbit-card:nth-of-type(5) { bottom: 90px; right: 10px; animation-delay: -4.1s; }
+    .orbit-card-head { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; font-size: 12px; font-weight: 750; }
+    .orbit-card-head svg { width: 16px; height: 16px; color: #87a0ff; }
+    .mini-line { height: 6px; border-radius: 999px; background: rgba(255,255,255,.06); margin: 7px 0; overflow: hidden; }
+    .mini-line span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #5477ff, #57dbff); }
+    .mini-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .mini-tags i { font-style: normal; font-size: 9px; padding: 4px 6px; border-radius: 6px; color: #9fb3da; background: rgba(255,255,255,.05); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes breathe { 50% { transform: scale(1.08); opacity: .76; } }
+    @keyframes scan { 0%,100% { top: -30%; } 50% { top: 110%; } }
+    @keyframes float { 50% { transform: translateY(-9px); } }
+
+    .trust-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: -24px; position: relative; z-index: 8; }
+    .trust-item { padding: 19px; border-radius: 16px; display: flex; align-items: center; gap: 12px; }
+    .trust-item strong { display: block; font-size: 15px; }
+    .trust-item span { color: var(--muted-2); font-size: 11px; }
+    .trust-item svg { width: 20px; height: 20px; color: #93a9ff; }
+
+    .problem-grid, .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+    .problem-card, .pillar-card { padding: 26px; position: relative; overflow: hidden; }
+    .problem-card::after, .pillar-card::after { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; right: -70px; top: -80px; background: radial-gradient(circle, rgba(108,140,255,.16), transparent 68%); }
+    .problem-num { color: #6476a2; font-weight: 800; font-size: 11px; letter-spacing: .12em; margin-bottom: 28px; }
+    .problem-card h3, .pillar-card h3 { margin: 18px 0 11px; font-size: 20px; }
+    .problem-card p, .pillar-card p { margin: 0; color: var(--muted); line-height: 1.75; font-size: 14px; }
+    .pillar-card ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+    .pillar-card li { display: flex; align-items: flex-start; gap: 9px; color: #b5c1da; font-size: 12px; line-height: 1.6; }
+    .pillar-card li svg { width: 15px; height: 15px; margin-top: 2px; color: var(--mint); flex: 0 0 auto; }
+
+    .system-preview { margin-top: 52px; padding: 14px; border-radius: 26px; background: linear-gradient(135deg, rgba(108,140,255,.16), rgba(67,217,255,.05), rgba(170,124,255,.1)); border: 1px solid rgba(134,158,220,.24); box-shadow: var(--shadow); }
+    .browser { border-radius: 18px; overflow: hidden; background: #0a1024; border: 1px solid rgba(148,163,184,.16); }
+    .browser-top { height: 44px; display: flex; align-items: center; gap: 7px; padding: 0 15px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .browser-dot { width: 8px; height: 8px; border-radius: 50%; background: #51617f; }
+    .browser-url { margin-left: 9px; width: min(420px, 54%); height: 24px; border-radius: 7px; background: rgba(255,255,255,.045); color: #667596; font-size: 9px; display: flex; align-items: center; padding: 0 10px; }
+    .preview-body { display: grid; grid-template-columns: 190px 1fr; min-height: 510px; }
+    .preview-side { border-right: 1px solid var(--line); padding: 18px 12px; background: #080e21; }
+    .preview-logo { display: flex; gap: 9px; align-items: center; margin: 0 7px 24px; font-size: 11px; font-weight: 750; }
+    .preview-logo i { width: 25px; height: 25px; border-radius: 8px; background: linear-gradient(135deg, var(--blue-2), var(--cyan)); }
+    .preview-nav { display: grid; gap: 5px; }
+    .preview-nav div { height: 31px; display: flex; align-items: center; padding: 0 10px; border-radius: 8px; color: #6f7f9f; font-size: 10px; }
+    .preview-nav div.active { color: #cdd8ff; background: rgba(108,140,255,.12); }
+    .preview-main { padding: 22px; background: radial-gradient(circle at 80% 0, rgba(61,103,255,.12), transparent 34%), #0b1126; }
+    .preview-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .preview-head strong { font-size: 15px; }
+    .preview-btn { height: 29px; padding: 0 11px; border-radius: 8px; background: linear-gradient(135deg, var(--blue-2), #7184ff); font-size: 9px; display: flex; align-items: center; }
+    .preview-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .preview-stat { padding: 14px; border-radius: 12px; background: rgba(255,255,255,.035); border: 1px solid var(--line); }
+    .preview-stat b { font-size: 20px; display: block; margin-top: 10px; }
+    .preview-stat span { font-size: 9px; color: #7483a1; }
+    .preview-chart-row { display: grid; grid-template-columns: 1.3fr .9fr; gap: 11px; margin-top: 11px; }
+    .preview-panel { min-height: 175px; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.026); }
+    .preview-panel-title { font-size: 10px; font-weight: 750; margin-bottom: 14px; }
+    .preview-bars { height: 117px; display: flex; align-items: end; gap: 11px; padding: 0 8px; }
+    .preview-bars i { flex: 1; border-radius: 5px 5px 2px 2px; background: linear-gradient(180deg, #5b7aff, #253e9a); box-shadow: 0 0 14px rgba(91,122,255,.15); animation: bars 2.8s ease-in-out infinite alternate; transform-origin: bottom; }
+    .preview-bars i:nth-child(2n) { background: linear-gradient(180deg, #47d5ff, #176f93); animation-delay: -.8s; }
+    @keyframes bars { 50% { transform: scaleY(.84); } }
+    .preview-list { display: grid; gap: 9px; }
+    .preview-list div { display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 8px; font-size: 9px; color: #91a0bd; }
+    .preview-list i { width: 24px; height: 24px; border-radius: 7px; background: rgba(108,140,255,.12); }
+    .preview-list em { font-style: normal; color: #61e6b7; }
+
+    .status-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 52px; align-items: start; margin-top: 50px; }
+    .status-summary { padding: 28px; position: sticky; top: 100px; }
+    .status-summary h3 { font-size: 24px; margin: 18px 0 10px; }
+    .status-summary p { color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .status-metric { display: flex; align-items: end; gap: 10px; margin-top: 26px; }
+    .status-metric strong { font-size: 54px; line-height: 1; }
+    .status-metric span { color: var(--muted-2); font-size: 12px; padding-bottom: 7px; }
+    .status-list { display: grid; gap: 14px; }
+    .status-row { padding: 20px; display: grid; grid-template-columns: 118px 1fr; gap: 18px; align-items: start; }
+    .status-row h4 { margin: 2px 0 6px; font-size: 15px; }
+    .status-row p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+    .status-row .status-pill { justify-self: start; }
+
+    .role-section { background: linear-gradient(180deg, rgba(10,16,36,.1), rgba(61,103,255,.08), rgba(10,16,36,.1)); }
+    .role-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
+    .role-card { padding: 34px; position: relative; overflow: hidden; }
+    .role-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 100% 0, rgba(67,217,255,.12), transparent 40%); pointer-events: none; }
+    .role-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 21px 0 26px; }
+    .role-list { display: grid; gap: 13px; }
+    .role-list div { display: flex; align-items: flex-start; gap: 11px; color: #bbc7df; font-size: 13px; line-height: 1.65; }
+    .role-list svg { width: 17px; height: 17px; color: var(--mint); margin-top: 2px; flex: 0 0 auto; }
+    .role-visual { position: relative; height: 520px; }
+    .role-node { position: absolute; width: 190px; padding: 18px; border-radius: 17px; background: rgba(14,21,46,.87); border: 1px solid var(--line-strong); box-shadow: var(--shadow-soft); }
+    .role-node strong { display: block; font-size: 14px; margin: 12px 0 5px; }
+    .role-node p { color: var(--muted-2); font-size: 11px; line-height: 1.55; margin: 0; }
+    .role-node:nth-child(1) { left: 50%; top: 28px; transform: translateX(-50%); }
+    .role-node:nth-child(2) { left: 0; top: 200px; }
+    .role-node:nth-child(3) { right: 0; top: 200px; }
+    .role-node:nth-child(4) { left: 50%; bottom: 18px; transform: translateX(-50%); }
+    .role-center { position: absolute; left: 50%; top: 50%; width: 130px; height: 130px; transform: translate(-50%,-50%); border-radius: 50%; display: grid; place-items: center; text-align: center; background: radial-gradient(circle, rgba(61,103,255,.35), rgba(13,20,44,.95) 65%); border: 1px solid rgba(108,140,255,.38); box-shadow: 0 0 50px rgba(61,103,255,.25); font-size: 12px; font-weight: 800; }
+    .connector { position: absolute; left: 50%; top: 50%; width: 330px; height: 330px; transform: translate(-50%,-50%); border: 1px dashed rgba(108,140,255,.24); border-radius: 50%; animation: spin 32s linear infinite reverse; }
+
+    .cta { padding: 58px; text-align: center; overflow: hidden; position: relative; }
+    .cta::before { content: ""; position: absolute; width: 460px; height: 460px; border-radius: 50%; left: 50%; top: -340px; transform: translateX(-50%); background: radial-gradient(circle, rgba(67,217,255,.24), rgba(61,103,255,.12), transparent 70%); }
+    .cta h2 { font-size: clamp(34px, 5vw, 56px); margin: 14px 0 13px; letter-spacing: -.045em; }
+    .cta p { color: var(--muted); max-width: 650px; margin: 0 auto 26px; line-height: 1.75; }
+    .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 1050px) {
+      .hero-grid, .role-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 112px; }
+      .hero-copy { max-width: 780px; }
+      .orbital { min-height: 560px; }
+      .status-layout { grid-template-columns: 1fr; }
+      .status-summary { position: static; }
+    }
+    @media (max-width: 860px) {
+      .trust-row, .problem-grid, .pillar-grid { grid-template-columns: 1fr 1fr; }
+      .preview-body { grid-template-columns: 145px 1fr; }
+      .preview-stats { grid-template-columns: 1fr 1fr; }
+      .preview-chart-row { grid-template-columns: 1fr; }
+      .role-visual { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .role-node { position: static; width: auto; transform: none !important; }
+      .role-center, .connector { display: none; }
+    }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 48px; }
+      .hero-copy { font-size: 15px; }
+      .orbital { min-height: 530px; transform: scale(.82); margin: -48px -45px; }
+      .trust-row, .problem-grid, .pillar-grid { grid-template-columns: 1fr; }
+      .preview-body { grid-template-columns: 1fr; min-height: auto; }
+      .preview-side { display: none; }
+      .preview-main { padding: 13px; }
+      .preview-stats { gap: 7px; }
+      .preview-chart-row { grid-template-columns: 1fr; }
+      .preview-panel:nth-child(2) { display: none; }
+      .status-row { grid-template-columns: 1fr; }
+      .role-visual { grid-template-columns: 1fr; }
+      .cta { padding: 38px 20px; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/neo-tech.css" />
+  <link rel="stylesheet" href="assets/light-tech.css" />
+</head>
+<body>
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="回到首页">
+        <span class="brand-mark" data-icon="sparkles"></span>
+        <span>Organization OS<small>AI-NATIVE WORK SYSTEM</small></span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#problem">为什么做</a>
+        <a href="#solution">系统能力</a>
+        <a href="#status">落地状态</a>
+        <a href="#role">我的角色</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost desktop-only" href="framework.html">系统架构</a>
+        <a class="btn btn-primary" href="demo.html">进入 Demo <span data-icon="arrowRight"></span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal visible">
+          <div class="eyebrow">AI-NATIVE · ORGANIZATION INTELLIGENCE</div>
+          <h1><span class="gradient-text">让组织协作</span><br />从群聊走向系统。</h1>
+          <p class="hero-copy">一套面向早期科技团队的 AI 原生组织协作系统：把需求流转、知识沉淀与组织洞察连接为可追溯的工作闭环。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="demo.html"><span data-icon="play"></span>体验可交互 Demo</a>
+            <a class="btn btn-secondary" href="framework.html"><span data-icon="layers"></span>查看五层架构</a>
+          </div>
+          <div class="hero-meta">
+            <span><i data-icon="userCheck"></i>从组织机制到产品原型的独立设计</span>
+            <span><i data-icon="shield"></i>全部人物、项目与业务均为虚构示例</span>
+            <span><i data-icon="git"></i>纯静态，可部署 GitHub Pages</span>
+          </div>
+          <div class="hero-note">这是一份用于展示产品逻辑、AI 工作流与组织机制的高保真交互 Demo；页面内人物、项目和业务数据均为虚构示例。</div>
+        </div>
+
+        <div class="orbital reveal reveal-delay-1" aria-label="系统能力动态示意">
+          <div class="core-glow"></div>
+          <div class="system-core">
+            <div class="core-content">
+              <div class="core-icon" data-icon="sparkles"></div>
+              <strong>Organization OS</strong>
+              <span>Context · Flow · Insight</span>
+            </div>
+          </div>
+          <div class="orbit-card">
+            <div class="orbit-card-head"><span data-icon="workflow"></span>需求全链路</div>
+            <div class="mini-line"><span style="width:78%"></span></div>
+            <div class="mini-tags"><i>评审</i><i>PRD</i><i>研发</i><i>交付</i></div>
+          </div>
+          <div class="orbit-card">
+            <div class="orbit-card-head"><span data-icon="database"></span>可信知识层</div>
+            <div class="mini-line"><span style="width:64%"></span></div>
+            <div class="mini-tags"><i>来源</i><i>版本</i><i>状态</i></div>
+          </div>
+          <div class="orbit-card">
+            <div class="orbit-card-head"><span data-icon="brain"></span>AI 工作流</div>
+            <div class="mini-line"><span style="width:86%"></span></div>
+            <div class="mini-tags"><i>结构化</i><i>摘要</i><i>关联</i></div>
+          </div>
+          <div class="orbit-card">
+            <div class="orbit-card-head"><span data-icon="activity"></span>组织洞察</div>
+            <div class="mini-line"><span style="width:56%"></span></div>
+            <div class="mini-tags"><i>目标</i><i>质量</i><i>风险</i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container trust-row reveal">
+      <div class="card trust-item"><span data-icon="layers"></span><div><strong>5 层系统架构</strong><span>从基础设施到决策输出</span></div></div>
+      <div class="card trust-item"><span data-icon="workflow"></span><div><strong>10 步需求链路</strong><span>跨部门自动交接逻辑</span></div></div>
+      <div class="card trust-item"><span data-icon="kanban"></span><div><strong>7 个功能页面</strong><span>完整可点击原型体验</span></div></div>
+      <div class="card trust-item"><span data-icon="shield"></span><div><strong>4 级权限模型</strong><span>角色、部门与信息边界</span></div></div>
+    </div>
+
+    <section id="problem" class="section">
+      <div class="container">
+        <div class="eyebrow reveal">01 · Real Problem</div>
+        <h2 class="section-title reveal">不是堆叠功能，<br /><span class="gradient-text">而是解决三个典型协作断点。</span></h2>
+        <p class="section-lead reveal">早期团队增长很快，但流程、知识与评价机制通常仍停留在口头沟通和个人经验里。系统从典型协作摩擦出发，而不是从功能清单出发。</p>
+        <div class="problem-grid">
+          <article class="card card-hover problem-card reveal">
+            <div class="problem-num">PROBLEM / 01</div>
+            <div class="icon-box" data-icon="workflow"></div>
+            <h3>需求在群里“失踪”</h3>
+            <p>有人提出、有人回复，但缺少统一状态、负责人和截止时间，卡在哪一步无法快速定位。</p>
+          </article>
+          <article class="card card-hover problem-card reveal reveal-delay-1">
+            <div class="problem-num">PROBLEM / 02</div>
+            <div class="icon-box green" data-icon="database"></div>
+            <h3>知识沉在个人电脑</h3>
+            <p>资料、决策与会议背景散落在本地，新人反复追问，团队每次都从头理解上下文。</p>
+          </article>
+          <article class="card card-hover problem-card reveal reveal-delay-2">
+            <div class="problem-num">PROBLEM / 03</div>
+            <div class="icon-box purple" data-icon="activity"></div>
+            <h3>人才判断缺少证据</h3>
+            <p>管理者掌握的信息不完整，绩效讨论容易只依赖印象，过程贡献和协作风险难以呈现。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="section section-tight">
+      <div class="container">
+        <div class="eyebrow reveal">02 · Product Concept</div>
+        <h2 class="section-title reveal">三根支柱，组成一套<br /><span class="gradient-text">可追溯的组织工作系统。</span></h2>
+        <div class="pillar-grid">
+          <article class="card card-hover pillar-card reveal">
+            <div class="icon-box" data-icon="workflow"></div>
+            <h3>需求全链路流转</h3>
+            <p>把需求从提出、评审、拆解到交付的关键节点结构化，让未完成事项持续留在台面。</p>
+            <ul>
+              <li><span data-icon="check"></span>每一步都有状态、负责人和交接条件</li>
+              <li><span data-icon="check"></span>早期项目可从 1–4 步轻量启动</li>
+              <li><span data-icon="check"></span>过程数据反向进入复盘与组织洞察</li>
+            </ul>
+          </article>
+          <article class="card card-hover pillar-card reveal reveal-delay-1">
+            <div class="icon-box green" data-icon="database"></div>
+            <h3>Context-first LLM Wiki</h3>
+            <p>知识不仅能被 AI 回答，还保留原始来源、版本与可靠性状态，避免答案成为不可解释的黑盒。</p>
+            <ul>
+              <li><span data-icon="check"></span>Raw → 整理区 → 正式 Wiki</li>
+              <li><span data-icon="check"></span>原始、已确认、有争议、已过期分级</li>
+              <li><span data-icon="check"></span>回答附来源，可回看原文上下文</li>
+            </ul>
+          </article>
+          <article class="card card-hover pillar-card reveal reveal-delay-2">
+            <div class="icon-box purple" data-icon="activity"></div>
+            <h3>组织洞察与人才 Review</h3>
+            <p>系统汇总目标、项目、质量与协作证据，为人才 Review 提供依据，但不替代管理者判断。</p>
+            <ul>
+              <li><span data-icon="check"></span>看目标完成，也看交付质量与难度</li>
+              <li><span data-icon="check"></span>识别阻塞、风险和数据缺口</li>
+              <li><span data-icon="check"></span>生成 Review 摘要与校准建议</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="system-preview reveal">
+          <div class="browser">
+            <div class="browser-top"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span><div class="browser-url">organization-os / workspace / overview</div></div>
+            <div class="preview-body">
+              <aside class="preview-side">
+                <div class="preview-logo"><i></i> Organization OS</div>
+                <div class="preview-nav"><div class="active">总览</div><div>需求中心</div><div>项目流程</div><div>LLM Wiki</div><div>AI 助手</div><div>组织洞察</div></div>
+              </aside>
+              <div class="preview-main">
+                <div class="preview-head"><strong>组织运行总览</strong><span class="preview-btn">＋ 提交需求</span></div>
+                <div class="preview-stats">
+                  <div class="preview-stat"><span>待评审需求</span><b>08</b></div>
+                  <div class="preview-stat"><span>本周交付</span><b>12</b></div>
+                  <div class="preview-stat"><span>Wiki 更新</span><b>24</b></div>
+                  <div class="preview-stat"><span>风险提醒</span><b>03</b></div>
+                </div>
+                <div class="preview-chart-row">
+                  <div class="preview-panel"><div class="preview-panel-title">跨部门协作节奏</div><div class="preview-bars"><i style="height:46%"></i><i style="height:71%"></i><i style="height:54%"></i><i style="height:88%"></i><i style="height:63%"></i><i style="height:78%"></i><i style="height:58%"></i></div></div>
+                  <div class="preview-panel"><div class="preview-panel-title">实时活动</div><div class="preview-list"><div><i></i><span>需求已进入技术评审</span><em>刚刚</em></div><div><i></i><span>Wiki 新增 4 条关联</span><em>12m</em></div><div><i></i><span>项目风险已提醒负责人</span><em>1h</em></div><div><i></i><span>本周 Context 已收齐 4/5</span><em>3h</em></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="status" class="section">
+      <div class="container">
+        <div class="eyebrow reveal">03 · Truthful Status</div>
+        <h2 class="section-title reveal">把“已落地”与“产品蓝图”<br /><span class="gradient-text">清楚地分开。</span></h2>
+        <div class="status-layout">
+          <aside class="card status-summary reveal">
+            <div class="icon-box cyan" data-icon="roadmap"></div>
+            <h3>用示例流程演示产品化路径</h3>
+            <p>本展示用匿名化示例呈现流程、知识库、高保真 Demo 与完整系统架构，并明确区分能力阶段与产品边界。</p>
+            <div class="status-metric"><strong>3</strong><span>种交付状态<br />透明呈现</span></div>
+          </aside>
+          <div class="status-list">
+            <article class="card status-row reveal"><span class="status-pill status-live">示例 · 已落地能力</span><div><h4>需求审批与追踪、权限与共享规则</h4><p>通过现有协作工具落地需求入口、负责人、优先级、状态与截止时间，并形成持续跟踪机制。</p></div></article>
+            <article class="card status-row reveal"><span class="status-pill status-pilot">示例 · 试运行能力</span><div><h4>Context 收集与 LLM Wiki 工作方式</h4><p>使用飞书、Markdown、Git 与 AI 工具验证知识更新、版本追踪和来源可查的协作机制。</p></div></article>
+            <article class="card status-row reveal"><span class="status-pill status-blueprint">示例 · 产品蓝图</span><div><h4>项目看板、AI 自动整理、组织洞察</h4><p>已完成信息架构、功能逻辑与可交互原型；正式数据联动、权限后端和自动化 Agent 仍需工程开发。</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="role" class="section role-section">
+      <div class="container role-grid">
+        <div class="card role-card reveal">
+          <div class="eyebrow">04 · My Role</div>
+          <h2 class="section-title" style="font-size:clamp(34px,4vw,50px)">从组织问题定义，<br />走到产品原型。</h2>
+          <p class="section-lead" style="font-size:15px">项目由组织发展负责人独立完成，不依赖专职产品经理或设计师。核心价值不是“写了一个网页”，而是把组织机制转译成可被产品化的系统。</p>
+          <div class="role-tags"><span class="tag tag-blue">需求分析</span><span class="tag tag-green">组织机制</span><span class="tag tag-purple">AI 工作流</span><span class="tag tag-orange">Vibe Coding</span></div>
+          <div class="role-list">
+            <div><span data-icon="checkCircle"></span>识别真实组织协作问题，完成用户、角色与权限拆解</div>
+            <div><span data-icon="checkCircle"></span>设计三根支柱、五层架构与十步需求主流程</div>
+            <div><span data-icon="checkCircle"></span>建立功能优先级、落地状态与产品边界</div>
+            <div><span data-icon="checkCircle"></span>独立制作 Web 原型，并持续基于典型用户反馈迭代</div>
+          </div>
+        </div>
+        <div class="role-visual reveal reveal-delay-1">
+          <div class="connector"></div>
+          <div class="role-center">组织机制<br />× AI 产品</div>
+          <div class="role-node"><div class="icon-box" data-icon="users"></div><strong>组织发展</strong><p>角色、流程、治理和人才机制</p></div>
+          <div class="role-node"><div class="icon-box green" data-icon="workflow"></div><strong>产品设计</strong><p>场景、信息架构和交互闭环</p></div>
+          <div class="role-node"><div class="icon-box purple" data-icon="brain"></div><strong>AI 工作流</strong><p>结构化、整理、关联与生成</p></div>
+          <div class="role-node"><div class="icon-box orange" data-icon="git"></div><strong>原型落地</strong><p>静态前端、GitHub Pages 部署</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card cta reveal">
+          <div class="eyebrow">Explore the Prototype</div>
+          <h2>现在，进入系统。</h2>
+          <p>你可以提交一条需求、查看十步流程、上传一份知识文档、体验带来源的 AI 问答，并生成一份组织 Review 摘要。</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="demo.html"><span data-icon="play"></span>开始交互体验</a>
+            <a class="btn btn-secondary" href="framework.html"><span data-icon="layers"></span>先看系统架构</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>AI-Native Organization OS · AI 组织协作产品原型 · Fictional Demo Data</span>
+      <div class="footer-links"><a href="demo.html">Demo</a><a href="framework.html">架构</a><a href="README.md">部署说明</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+  <script src="assets/motion.js"></script>
+</body>
+</html>
