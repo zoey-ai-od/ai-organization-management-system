@@ -1,6 +1,6 @@
-# NEXUS Organization OS — AI 原生组织协作工具
+# NEXUS — AI 原生组织协作工具
 
-> 从群聊到系统：让需求流转、知识沉淀与组织洞察成为可追溯的工作闭环。
+> 从群聊到工具：让需求流转、知识沉淀与组织洞察成为可追溯的工作闭环。
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-demo%20ready-blue?style=flat-square" alt="Status" />
@@ -13,13 +13,13 @@
 
 ## 项目概述 ｜ Overview
 
-**NEXUS Organization OS** 是一套面向早期科技团队的 AI 原生组织协作工具。项目从真实组织管理问题出发，将**需求流转**、**知识沉淀**与**组织洞察**连接为可追溯的工作闭环，而非简单地堆砌功能清单。
+**NEXUS** 是一套面向早期科技团队的 AI 原生组织协作工具。项目从真实组织管理问题出发，将**需求流转**、**知识沉淀**与**组织洞察**连接为可追溯的工作闭环，而非简单地堆砌功能清单。
 
 整个项目由组织发展负责人独立完成——从组织问题定义、机制设计到产品原型落地，将组织管理思维转化为可被工程化的产品系统。
 
-**NEXUS Organization OS** is an AI-native organization collaboration tool designed for early-stage tech teams. Starting from real organizational pain points, it connects **requirement workflows**, **knowledge accumulation**, and **organizational insights** into a traceable closed loop — rather than simply piling up feature lists.
+**NEXUS** is an AI-native organization collaboration tool designed for early-stage tech teams. Starting from real organizational pain points, it connects **requirement workflows**, **knowledge accumulation**, and **organizational insights** into a traceable closed loop — rather than simply piling up feature lists.
 
-The entire project was independently completed by an organizational development lead — from problem definition and mechanism design to product prototyping, translating organizational management thinking into an engineerable product system.
+The entire project was independently completed by an organizational development lead — from problem definition and mechanism design to product prototyping, translating organizational management thinking into an engineerable product.
 
 ---
 
@@ -61,7 +61,7 @@ The entire project was independently completed by an organizational development 
 
 ---
 
-## 五层系统架构 ｜ Five-Layer Architecture
+## 五层架构 ｜ Five-Layer Architecture
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -108,7 +108,7 @@ The entire project was independently completed by an organizational development 
 | 级别 | 角色 | 可见范围 |
 |------|------|----------|
 | **L1** | CEO / 合伙人 | 全公司关键数据、审批、资源配置、人才决策 |
-| **L2** | 组织发展 / 系统管理员 | 权限配置、组织数据、管理层汇总视图 |
+| **L2** | 组织发展 / 组织运营 | 权限配置、组织数据、管理层汇总视图 |
 | **L3** | 部门负责人 | 本部门全部数据 + 授权跨部门共享内容 |
 | **L4** | 普通员工 | 个人任务、参与项目、全员公开知识 |
 
@@ -119,10 +119,10 @@ The entire project was independently completed by an organizational development 
 ## 项目文件结构 ｜ File Structure
 
 ```
-ai-organization-os/
+ai-organization-collaboration-tool/
 ├── index.html              # 项目作品集首页（问题、方案、落地状态、个人角色）
 ├── demo.html               # 可交互产品 Demo（7 个功能页面）
-├── framework.html          # 五层系统架构 + 十步流程 + 四级权限
+├── framework.html          # 五层架构 + 十步流程 + 四级权限
 ├── 404.html                # 404 页面
 ├── .nojekyll               # GitHub Pages bypass Jekyll
 ├── README.md               # 项目介绍（本文件）
@@ -211,7 +211,7 @@ npx http-server -p 8000
 ## 设计边界 ｜ Design Boundaries
 
 - 页面中所有人物姓名、项目名称、业务数据和风险场景均为**虚构示例**
-- 本项目为高保真系统原型与组织机制设计作品集，不代表所有能力已完成企业级工程部署
+- 本项目为高保真产品原型与组织机制设计作品集，不代表所有能力已完成企业级工程部署
 - 不可直接用于生产环境，正式上线需补充后端服务、身份认证、数据安全和人工审核机制
 
 ---
