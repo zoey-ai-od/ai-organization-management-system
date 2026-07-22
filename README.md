@@ -1,4 +1,4 @@
-# NEXUS Organization OS — AI 原生组织协作系统
+# NEXUS Organization OS — AI 原生组织协作工具
 
 > 从群聊到系统：让需求流转、知识沉淀与组织洞察成为可追溯的工作闭环。
 
@@ -13,11 +13,11 @@
 
 ## 项目概述 ｜ Overview
 
-**NEXUS Organization OS** 是一套面向早期科技团队的 AI 原生组织协作系统。项目从真实组织管理问题出发，将**需求流转**、**知识沉淀**与**组织洞察**连接为可追溯的工作闭环，而非简单地堆砌功能清单。
+**NEXUS Organization OS** 是一套面向早期科技团队的 AI 原生组织协作工具。项目从真实组织管理问题出发，将**需求流转**、**知识沉淀**与**组织洞察**连接为可追溯的工作闭环，而非简单地堆砌功能清单。
 
 整个项目由组织发展负责人独立完成——从组织问题定义、机制设计到产品原型落地，将组织管理思维转化为可被工程化的产品系统。
 
-**NEXUS Organization OS** is an AI-native organization collaboration system designed for early-stage tech teams. Starting from real organizational pain points, it connects **requirement workflows**, **knowledge accumulation**, and **organizational insights** into a traceable closed loop — rather than simply piling up feature lists.
+**NEXUS Organization OS** is an AI-native organization collaboration tool designed for early-stage tech teams. Starting from real organizational pain points, it connects **requirement workflows**, **knowledge accumulation**, and **organizational insights** into a traceable closed loop — rather than simply piling up feature lists.
 
 The entire project was independently completed by an organizational development lead — from problem definition and mechanism design to product prototyping, translating organizational management thinking into an engineerable product system.
 
