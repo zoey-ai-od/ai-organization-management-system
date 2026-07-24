@@ -1,4 +1,4 @@
-# NEXUS — AI 原生组织协作工具
+<h1 align="center">NEXUS — AI 原生组织协作工具</h1>
 
 <div align="center">
 
