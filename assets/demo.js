@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { id:'req-4', title:'发布页面产品价值结构优化', priority:'P1', dept:'GTM 部', ownerName:'何嘉', owner:'何', status:'待评审', deadline:'07-23', requester:'GTM 部', desc:'优化产品价值表达结构，支持发布节奏与市场转化。', actions:['对齐品牌表达','同步产品能力边界','进入评审'], linkedOKR:'GTM 发布准备', linkedTask:'产品页改版' },
       { id:'req-5', title:'嵌入式日志自动归档', priority:'P1', dept:'研发部门', ownerName:'郑昊', owner:'郑', status:'有阻塞', deadline:'07-26', requester:'研发部门', desc:'将嵌入式日志沉淀进统一目录，并自动建立版本与上下文关联。', actions:['确认日志格式','补充权限策略','排查当前阻塞项'], linkedOKR:'数据资产管理', linkedTask:'日志归档自动化' },
       { id:'req-6', title:'新员工 Context Onboarding', priority:'P2', dept:'组织发展部', ownerName:'组织发展', owner:'OD', status:'已完成', deadline:'07-18', requester:'组织发展部', desc:'将入职资料、组织信息与上下文材料整合到统一 onboarding 流程。', actions:['沉淀标准资料','完善欢迎流程','组织复盘'], linkedOKR:'组织能力建设', linkedTask:'入职流程优化' },
-      { id:'req-7', title:'竞品 Mapping 数据库更新', priority:'P2', dept:'GTM 部', ownerName:'沈墨', owner:'沈', status:'已完成', deadline:'07-17', requester:'GTM 部', desc:'更新竞品数据库与标签体系，支持销售与产品决策。', actions:['完善标签','同步结论','沉淀知识库'], linkedOKR:'市场情报系统', linkedTask:'竞品库维护' },
+      { id:'req-7', title:'竞品 Mapping 数据库更新', priority:'P2', dept:'GTM 部', ownerName:'沈墨', owner:'沈', status:'已完成', deadline:'07-17', requester:'GTM 部', desc:'更新竞品数据库与标签体系，支持销售与产品决策。', actions:['完善标签','同步结论','沉淀知识库'], linkedOKR:'市场情报工具', linkedTask:'竞品库维护' },
       { id:'req-8', title:'需求评审记录模板统一', priority:'P2', dept:'组织发展部', ownerName:'组织发展', owner:'OD', status:'进行中', deadline:'07-24', requester:'组织发展部', desc:'统一评审记录模板，提升需求过程留痕质量。', actions:['统一模板字段','培训相关负责人','追踪执行效果'], linkedOKR:'流程标准化', linkedTask:'模板统一化' }
     ],
     processSteps: [
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { id:'step-7', title:'测试执行', role:'研发 / 测试', desc:'开展联调和回归测试，追踪问题闭环。', actions:['回归测试','输出报告','修复问题'] },
       { id:'step-8', title:'交付评审', role:'跨部门评审组', desc:'确认交付结果、上线边界与风险。', actions:['完成交付评审','确认上线条件','记录结论'] },
       { id:'step-9', title:'上线发布', role:'GTM 部', desc:'协调发布节奏与内外部沟通。', actions:['准备物料','协调发布窗口','跟踪反馈'] },
-      { id:'step-10', title:'复盘与 Review', role:'系统 + 管理层', desc:'沉淀证据，辅助复盘与人才 Review。', actions:['产出复盘记录','补齐证据链','形成洞察摘要'] }
+      { id:'step-10', title:'复盘与 Review', role:'工具 + 管理层', desc:'沉淀证据，辅助复盘与人才 Review。', actions:['产出复盘记录','补齐证据链','形成洞察摘要'] }
     ],
     folderGroups: {
       primary: ['全部资料', 'Raw 原始区', 'AI 整理区', '正式 Wiki', '已过期'],
@@ -62,16 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         key:'产品蓝图', count:5, tagClass:'tag-blueprint', tagText:['待工程开发','待技术支持','设计阶段','方案阶段','上线前必需'],
         items:[
-          { id:'rm-8', title:'项目看板与自动交接', desc:'需要正式后端、事件系统与权限模型。', tag:'待工程开发', kind:'blueprint' },
+          { id:'rm-8', title:'项目看板与自动交接', desc:'需要正式后端、事件机制与权限模型。', tag:'待工程开发', kind:'blueprint' },
           { id:'rm-9', title:'Agent 自动整理 Wiki', desc:'需要文档解析、审核队列和版本回滚。', tag:'待技术支持', kind:'blueprint' },
           { id:'rm-10', title:'组织洞察引擎', desc:'先建立数据口径，再逐步增加提示与诊断。', tag:'设计阶段', kind:'blueprint' },
           { id:'rm-11', title:'飞书数据迁移', desc:'规划字段映射与历史记录导入，避免断层。', tag:'方案阶段', kind:'blueprint' },
-          { id:'rm-12', title:'企业级安全与审计', desc:'正式系统需完善 SSO、日志、备份与权限审计。', tag:'上线前必需', kind:'blueprint' }
+          { id:'rm-12', title:'企业级安全与审计', desc:'正式产品需完善 SSO、日志、备份与权限审计。', tag:'上线前必需', kind:'blueprint' }
         ]
       }
     ],
     chatIntro: [
-      { role:'ai', text:'你好，我可以基于当前 Demo 中的需求、项目流程和知识文档回答问题。我的回答会显示来源，并提示信息的新鲜度。', sources:['系统说明 v1.4','权限规则 · 已确认'] },
+      { role:'ai', text:'你好，我可以基于当前 Demo 中的需求、项目流程和知识文档回答问题。我的回答会显示来源，并提示信息的新鲜度。', sources:['工具说明 v1.4','权限规则 · 已确认'] },
       { role:'user', text:'北极星 Demo 当前有哪些前置依赖和风险？' },
       { role:'ai', text:'当前有 2 项前置依赖需优先确认：一是「嵌入式日志自动归档」的数据口径仍在对齐；二是「需求评审记录模板统一」尚未完成，影响上下文沉淀。当前风险主要集中在 GTM 上下文更新滞后，以及单点负责人依赖。', sources:['智能设备异常事件回溯 · 需求详情','组织风险提醒 · 本周'] }
     ]
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
       report: '组织洞察',
       okr: '产品路线图'
     };
-    breadcrumb.innerHTML = `<span>组织操作系统</span><svg viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="active">${viewMap[view] || '组织总览'}</span>`;
+    breadcrumb.innerHTML = `<span>组织协作工具</span><svg viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="active">${viewMap[view] || '组织总览'}</span>`;
   }
 
   function priorityClass(priority) { return (priority || '').toLowerCase(); }

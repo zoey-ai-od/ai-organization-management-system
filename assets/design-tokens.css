@@ -12,7 +12,7 @@
 */
 
 :root {
-  /* ── 色彩系统 ── */
+  /* ── 色彩规范 ── */
   /* 品牌色 */
   --brand-blue:       #5478ff;
   --brand-blue-deep:  #3b63f3;
@@ -52,7 +52,7 @@
   --shadow-button:    0 14px 32px rgba(56, 92, 210, 0.23);
   --shadow-card-hover: 0 26px 70px rgba(60, 87, 145, 0.15);
 
-  /* ── 排版系统 ── */
+  /* ── 排版规范 ── */
   --font-primary:     'Inter', 'SF Pro Display', -apple-system, 'PingFang SC', system-ui, sans-serif;
   --font-mono:        'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
 
@@ -70,7 +70,7 @@
   --leading-normal:   1.5;
   --leading-relaxed:  1.65;
 
-  /* ── 间距系统 (4px base) ── */
+  /* ── 间距规范 (4px base) ── */
   --space-1:          4px;
   --space-2:          8px;
   --space-3:          12px;
